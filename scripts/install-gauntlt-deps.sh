@@ -1,7 +1,8 @@
 ## shell script to prepare Gauntlt Getting Started environment
 
 # required distro packages
-sudo apt-get -y install nmap curl libcurl3-dev rbenv libyaml-dev
+sudo apt-get -y install nmap curl libcurl3-dev rbenv libyaml-dev \
+  libxml2-dev libxslt-dev
 
 # rbenv ENV vars
 echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bash_profile
