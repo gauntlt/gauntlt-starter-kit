@@ -1,5 +1,7 @@
 ## shell script to prepare Gauntlt Getting Started environment
 
+RUBY_VER='1.9.3-p194'
+
 # required distro packages
 sudo apt-get -y install nmap curl libcurl3-dev rbenv libyaml-dev \
   libxml2-dev libxslt-dev
@@ -10,15 +12,16 @@ echo 'eval "$(rbenv init -)"' >> ~/.bash_profile
 
 # download and build ruby
 mkdir $HOME/tmp && cd $HOME/tmp
-wget http://ftp.ruby-lang.org/pub/ruby/1.9/ruby-1.9.3-p194.tar.gz
-tar xzvf ruby-1.9.3-p194.tar.gz
-cd ruby-1.9.3-p194
-./configure --prefix=$HOME/.rbenv/versions/1.9.3-p194
+#wget http://ftp.ruby-lang.org/pub/ruby/1.9/ruby-${RUBY_VER}.tar.gz
+wget http://mirrors.ibiblio.org/pub/mirrors/ruby/ruby-${RUBY_VER}.tar.gz
+tar xzvf ruby-${RUBY_VER}.tar.gz
+cd ruby-${RUBY_VER}
+./configure --prefix=$HOME/.rbenv/versions/${RUBY_VER}
 make
 make install
 
 # use the new ruby
-rbenv global 1.9.3-p194
+rbenv global ${RUBY_VER}
 echo ruby is `which ruby`
 
 # gherkin syntax highlighting in vim for .attack files
