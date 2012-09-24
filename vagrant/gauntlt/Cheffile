@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+#^syntax detection
+
+site 'http://community.opscode.com/api/v1'
+
+#cookbook 'rbenv',
+  #:git => 'https://github.com/fnichol/chef-rbenv', :ref => 'v0.6.10'
+
+#cookbook 'ruby_build',
+  #:git => 'https://github.com/fnichol/chef-ruby_build', :ref => 'v0.6.2'
+
+cookbook 'build-essential'
+#cookbook 'apt'
+#cookbook 'git'
+#cookbook 'tar'
