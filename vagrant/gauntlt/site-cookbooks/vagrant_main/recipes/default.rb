@@ -29,10 +29,38 @@ end
   end
 end
 
-
 # install gems
 ['gauntlt', 'arachni'].each do |pkg|
   gem_package pkg do
     action :install
+  end
+end
+
+# install sslyze
+git "sslyze" do
+    repository "https://github.com/iSECPartners/sslyze.git"
+    reference "master"
+    action :checkout
+    destination "/home/vagrant/sslyze"
+end
+
+# update bashrc to support sslyze
+cookbook_file "/home/vagrant/.bashrc" do
+  source "vagrant.bashrc"
+  mode "0644"
+end
+
+# attacks
+directory "/home/vagrant/attacks" do
+  owner "vagrant"
+  group "vagrant"
+  mode "0755"
+  action :create
+end
+
+['nmap', 'sslyze'].each do |file|
+  cookbook_file "/home/vagrant/attacks/#{file}" do
+    source file
+    mode "0644"
   end
 end
