@@ -2,8 +2,8 @@
 # Cookbook Name:: vagrant_main
 # Recipe:: default
 
-require_recipe "build-essential"
-# require_recipe "apt"
+include_recipe "build-essential"
+include_recipe "apt"
 # require_recipe "tar"
 # require_recipe "git"
 

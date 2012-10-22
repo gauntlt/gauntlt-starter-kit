@@ -7,7 +7,8 @@ Vagrant::Config.run do |config|
   # please see the online documentation at vagrantup.com.
 
   # Replace the default, "insecure" SSH keys with your own
-  config.ssh.private_key_path = "~/.ssh/id_rsa"
+  # For example, add your id_rsa.pub to ~vagrant/.ssh/authorized_keys
+  #config.ssh.private_key_path = "~/.ssh/id_rsa"
 
   # Every Vagrant virtual environment requires a box to build off of.
   config.vm.box = "precise32"
@@ -28,7 +29,7 @@ Vagrant::Config.run do |config|
   # Assign this VM to a bridged network, allowing you to connect directly to a
   # network using the host's network device. This makes the VM appear as another
   # physical device on your network.
-  config.vm.network :bridged
+  #config.vm.network :bridged
 
   # Forward a port from the guest to the host, which allows for outside
   # computers to access the VM, whereas host only networking does not.

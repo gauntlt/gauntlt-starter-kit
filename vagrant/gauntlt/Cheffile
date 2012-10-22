@@ -10,6 +10,6 @@ site 'http://community.opscode.com/api/v1'
   #:git => 'https://github.com/fnichol/chef-ruby_build', :ref => 'v0.6.2'
 
 cookbook 'build-essential'
-#cookbook 'apt'
+cookbook 'apt'
 #cookbook 'git'
 #cookbook 'tar'
