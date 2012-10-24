@@ -11,5 +11,5 @@ site 'http://community.opscode.com/api/v1'
 
 cookbook 'build-essential'
 cookbook 'apt'
-#cookbook 'git'
+cookbook 'git'
 #cookbook 'tar'

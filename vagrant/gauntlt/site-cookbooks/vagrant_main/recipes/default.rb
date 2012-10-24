@@ -5,7 +5,7 @@
 include_recipe "build-essential"
 include_recipe "apt"
 # require_recipe "tar"
-# require_recipe "git"
+require_recipe "git"
 
 # install distro packages for building gems
 ['ruby1.9.3', 'libxml2', 'libxml2-dev', 'libxslt-dev', ].each do |pkg|
@@ -30,7 +30,8 @@ end
 end
 
 # install gems
-['gauntlt', 'arachni'].each do |pkg|
+# ['gauntlt', 'arachni'].each do |pkg|
+['gauntlt'].each do |pkg|
   gem_package pkg do
     action :install
   end
