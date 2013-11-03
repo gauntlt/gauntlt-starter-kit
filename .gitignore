@@ -1,3 +1,4 @@
 /vagrant/gauntlt/Cheffile.lock
 /vagrant/gauntlt/tmp
 /vagrant/gauntlt/.vagrant
+*.sw*
