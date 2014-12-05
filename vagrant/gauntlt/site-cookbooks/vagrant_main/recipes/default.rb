@@ -4,7 +4,6 @@
 
 include_recipe "build-essential"
 include_recipe "apt"
-# include_recipe "tar"
 include_recipe "git"
 
 # install distro packages for building gems
@@ -29,12 +28,8 @@ end
   end
 end
 
-# install gems
-# ['gauntlt', 'arachni'].each do |pkg|
-['gauntlt'].each do |pkg|
-  gem_package pkg do
-    action :install
-  end
+execute "install gems" do 
+  command "/usr/bin/ruby -S gem install gauntlt bundler arachni"
 end
 
 # install sslyze
@@ -43,6 +38,8 @@ git "sslyze" do
     reference "master"
     action :checkout
     destination "/home/vagrant/sslyze"
+    user "vagrant"
+    group "vagrant"
 end
 
 # update bashrc to support sslyze
@@ -66,10 +63,28 @@ end
   end
 end
 
-# install sslyze
+# install gauntlt-demo
 git "gauntlt-demo" do
     repository "https://github.com/gauntlt/gauntlt-demo.git"
     reference "master"
     action :checkout
     destination "/home/vagrant/gauntlt-demo"
+    user "vagrant"
+    group "vagrant"
+end
+
+# set up gauntlt-demo
+execute "gauntlt-demo setup part 1 (Initialize Submodules)" do
+  user "vagrant"
+  command "cd /home/vagrant/gauntlt-demo && rm -f .initialized && git submodule update --init --recursive && touch .initialized"
+  creates "/home/vagrant/gauntlt-demo/.initialized"
+end
+
+execute "gauntlt-demo setup part 2 (Install Gems)" do
+  command "cd /home/vagrant/gauntlt-demo && /usr/bin/ruby -S bundle && cd vendor/railsgoat && /usr/bin/ruby -S bundle"
+end
+
+execute "gauntlt-demo setup part 3 (Start Services)" do
+  user "vagrant"
+  command "cd /home/vagrant/gauntlt-demo && bundle exec start_services &"
 end
