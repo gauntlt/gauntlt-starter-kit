@@ -2,3 +2,5 @@
 /vagrant/gauntlt/tmp
 /vagrant/gauntlt/.vagrant
 *.sw*
+
+.project
