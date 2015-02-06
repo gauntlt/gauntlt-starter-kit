@@ -7,7 +7,7 @@ include_recipe "apt"
 include_recipe "git"
 
 # install distro packages for building gems
-['ruby1.9.3', 'libxml2', 'libxml2-dev', 'libxslt-dev', ].each do |pkg|
+['ruby1.9.1-dev', 'libxml2', 'libxml2-dev', 'libxslt-dev'].each do |pkg|
   package pkg do
     action :install
   end
@@ -21,14 +21,14 @@ end
 end
 
 # install distro packages for arachni
-['libcurl4-openssl-dev', 'libsqlite3-dev',  
+['libcurl4-openssl-dev', 'libsqlite3-dev',
   'libyaml-dev', 'zlib1g-dev', 'ruby1.9.1-dev'].each do |pkg|
   package pkg do
     action :install
   end
 end
 
-execute "install gems" do 
+execute "install gems" do
   command "/usr/bin/ruby -S gem install gauntlt bundler arachni"
 end
 
@@ -73,18 +73,29 @@ git "gauntlt-demo" do
     group "vagrant"
 end
 
+
 # set up gauntlt-demo
-execute "gauntlt-demo setup part 1 (Initialize Submodules)" do
+execute "gauntlt-demo setup" do
   user "vagrant"
-  command "cd /home/vagrant/gauntlt-demo && rm -f .initialized && git submodule update --init --recursive && touch .initialized"
-  creates "/home/vagrant/gauntlt-demo/.initialized"
+  command "cd /home/vagrant/gauntlt-demo && git submodule update --init --recursive && bundle && bundle install && bundle exec start_services &"
 end
 
-execute "gauntlt-demo setup part 2 (Install Gems)" do
-  command "cd /home/vagrant/gauntlt-demo && /usr/bin/ruby -S bundle && cd vendor/railsgoat && /usr/bin/ruby -S bundle"
-end
 
-execute "gauntlt-demo setup part 3 (Start Services)" do
-  user "vagrant"
-  command "cd /home/vagrant/gauntlt-demo && bundle exec start_services &"
-end
+
+
+# set up gauntlt-demo
+# execute "gauntlt-demo setup part 1 (Initialize Submodules)" do
+#  user "vagrant"
+#  command "cd /home/vagrant/gauntlt-demo && rm -f .initialized && git submodule update --init --recursive && touch .initialized"
+#  creates "/home/vagrant/gauntlt-demo/.initialized"
+#end
+
+#execute "gauntlt-demo setup part 2 (Install Gems)" do
+#  user "vagrant"
+#  command "cd /home/vagrant/gauntlt-demo && /usr/bin/ruby -S bundle && cd vendor/railsgoat && /usr/bin/ruby -S bundle"
+#end
+
+#execute "gauntlt-demo setup part 3 (Start Services)" do
+#  user "vagrant"
+#  command "cd /home/vagrant/gauntlt-demo && bundle exec start_services &"
+#end
