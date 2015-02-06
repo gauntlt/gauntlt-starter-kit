@@ -77,7 +77,7 @@ end
 # set up gauntlt-demo
 execute "gauntlt-demo setup" do
   user "vagrant"
-  command "cd /home/vagrant/gauntlt-demo && git submodule update --init --recursive && bundle && bundle exec start_services &"
+  command "cd /home/vagrant/gauntlt-demo && git submodule update --init --recursive && bundle && bundle install && bundle exec start_services &"
 end
 
 
