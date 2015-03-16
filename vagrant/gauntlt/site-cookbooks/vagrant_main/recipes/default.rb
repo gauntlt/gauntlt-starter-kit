@@ -20,9 +20,10 @@ end
   end
 end
 
-# install distro packages for arachni
+# install distro packages for arachni and garmr
 ['libcurl4-openssl-dev', 'libsqlite3-dev',
-  'libyaml-dev', 'zlib1g-dev', 'ruby1.9.1-dev'].each do |pkg|
+  'libyaml-dev', 'zlib1g-dev', 'ruby1.9.1-dev',
+  'python-setuptools'].each do |pkg|
   package pkg do
     action :install
   end
@@ -77,25 +78,12 @@ end
 # set up gauntlt-demo
 execute "gauntlt-demo setup" do
   user "vagrant"
-  command "cd /home/vagrant/gauntlt-demo && git submodule update --init --recursive && bundle && bundle install && bundle exec start_services &"
+  cwd "/home/vagrant/gauntlt-demo"
+  command "git submodule update --init --recursive && bundle install"
 end
 
-
-
-
-# set up gauntlt-demo
-# execute "gauntlt-demo setup part 1 (Initialize Submodules)" do
-#  user "vagrant"
-#  command "cd /home/vagrant/gauntlt-demo && rm -f .initialized && git submodule update --init --recursive && touch .initialized"
-#  creates "/home/vagrant/gauntlt-demo/.initialized"
-#end
-
-#execute "gauntlt-demo setup part 2 (Install Gems)" do
-#  user "vagrant"
-#  command "cd /home/vagrant/gauntlt-demo && /usr/bin/ruby -S bundle && cd vendor/railsgoat && /usr/bin/ruby -S bundle"
-#end
-
-#execute "gauntlt-demo setup part 3 (Start Services)" do
-#  user "vagrant"
-#  command "cd /home/vagrant/gauntlt-demo && bundle exec start_services &"
-#end
+execute "garmr install" do
+  user "root"
+  cwd "/home/vagrant/gauntlt-demo/vendor/Garmr"
+  command "python setup.py install"
+end
