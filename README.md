@@ -15,3 +15,7 @@ $ vagrant ssh
 * Virtual Box
 * Vagrant
 
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/gauntlt/gauntlt-starter-kit/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
