@@ -30,7 +30,8 @@ end
 end
 
 execute "install gems" do
-  command "/usr/bin/ruby -S gem install gauntlt bundler arachni"
+  command "/usr/bin/ruby -S gem install arachni -v 1.0.6"
+  command "/usr/bin/ruby -S gem install gauntlt bundler"
 end
 
 # install sslyze
